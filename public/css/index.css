@@ -1,0 +1,141 @@
+html, body {
+    margin: 0;
+    overflow: hidden;
+}
+
+@media (min-aspect-ratio: 3/2) {
+    .bg {
+        width: 100vw;
+        height: 100vh;
+
+        /* background-image: url(../assets/kit_bg.png); */
+        background-color: #FFFFFF;
+        background-repeat: no-repeat;
+        background-size: 100vw 100vh;
+    }
+}
+
+@media (max-aspect-ratio: 3/2) {
+    .bg {
+        width: 100vw;
+        height: 100vh;
+
+        /* background-image: url(../assets/kit_bg.png); */
+        background-color: #FFFFFF;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
+
+.container {
+    height: 66.6vw;
+    max-width: 150vh;
+    max-height: 100vh;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title_container {
+    height: 28.6%;
+    text-align: center;
+    font-size: 10vmin;
+}
+
+.contents_container {
+    width: 87.4%;
+    height: 72%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.large_contents_container {
+    width: 78.5%;
+
+    display: flex;
+    justify-content: space-between;
+
+    text-align: center;
+    font-size: 4vmin;
+
+    position: absolute;
+    /*bottom: 21.5%;*/
+    left: 14%;
+}
+
+.small_contents_container {
+    width: 14.2%;
+
+    position: absolute;
+    left: 0;
+}
+
+.light_off_contents_container {
+    width: 10.7%;
+
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+}
+
+.large_icon {
+    width: 29.9%;
+}
+
+.small_icon {
+    width: 100%;
+}
+
+.circle_icon {
+    width: 100%;
+}
+
+.icon > img {
+    width: 100%;
+}
+
+/* .large_icon > img:not(.info) {
+    border: thick;
+    border: solid #808000;
+    border-radius: 10px;
+} */
+
+.large_icon.selected > img:not(.info) {
+    border: thick;
+    border: solid blue;
+    border-radius: 10px;
+}
+
+.large_icon.unselected > img:not(.info) {
+    border: thick;
+    border: solid gray;
+    border-radius: 10px;
+}
+
+.large_icon.pressed > img:not(.info) {
+    border: thick;
+    border: solid red;
+    border-radius: 10px;
+}
+
+.icon:not(.selected) > img.selected_image {
+    display: none;
+}
+
+.icon:not(.unselected) > img.unselected_image {
+    display: none;
+}
+
+.icon:not(.pressed) > img.pressed_image {
+    display: none;
+}
+.info {
+    height: 1pt;
+}
