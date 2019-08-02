@@ -8,13 +8,9 @@ require 'net/http'
 require 'uri'
 require 'thread/pool'
 
-require './led_controller'
 require './content_controller'
 
 $large_contents = [
- # { id: 'lego', target: 'block-identifier.local', port:'5001', name: 'ブロック', is_alive:false, selected: false, unselect_img: 'assets/kit_btn_main01_off.png', select_img: 'assets/kit_btn_main01_on.png', press_img: 'assets/kit_btn_main01_press.png' },
- # { id: 'paint', target: 'painting.local', port:'5001', name: 'おえかき',is_alive:false, selected: false, unselect_img: 'assets/kit_btn_main02_off.png', select_img: 'assets/kit_btn_main02_on.png', press_img: 'assets/kit_btn_main02_press.png' },
- # { id: 'camera', target: 'hitokage.local', port:'5001', name: 'カメラ', is_alive:false, selected: false, unselect_img: 'assets/kit_btn_main03_off.png', select_img: 'assets/kit_btn_main03_on.png', press_img: 'assets/kit_btn_main03_press.png' }
  { id: 'demos', target: 'localhost', port:'8002', name: 'デモ', is_alive:false, selected: false, unselect_img: 'assets/demo.jpg', select_img: 'assets/demo.jpg', press_img: 'assets/demo.jpg' },
  { id: 'rs_server', target: 'localhost', port:'8002', name: 'カメラ', is_alive:false, selected: false, unselect_img: 'assets/bunshin.png', select_img: 'assets/bunshin.png', press_img: 'assets/bunshin.png' },
  { id: 'iguchi', target: 'localhost', port:'8002', name: 'キーボード', is_alive:false, selected: false, unselect_img: 'assets/keyboad.jpg', select_img: 'assets/keyboad.jpg', press_img: 'assets/keyboad.jpg' }
@@ -25,7 +21,7 @@ $small_contents = [
 ]
 
 $light_off_contents = [
-  { id: 'alldisable', name: '消灯', is_alive:true, selected: true, unselect_img: 'assets/kit_btn_led_on.png', select_img: 'assets/kit_btn_led_off.png', press_img: 'assets/kit_btn_led_press.png' }
+  { id: 'alldisable', target: 'localhost', port:'8002', name: '消灯', is_alive:true, selected: true, unselect_img: 'assets/kit_btn_led_on.png', select_img: 'assets/kit_btn_led_off.png', press_img: 'assets/kit_btn_led_press.png' }
 ]
 
 $contents = $large_contents + $small_contents + $light_off_contents
@@ -41,8 +37,7 @@ class App < Sinatra::Base
   def initialize
     super
     #led_controller's hostname and port will overwrite by content_controller's status response.
-    led_controller = LEDController.new 'localhost', 8002 
-    @content_countroller = ContentController.new $large_contents + $small_contents, led_controller
+    @content_countroller = ContentController.new $contents
   end
 
   get '/' do
@@ -55,7 +50,7 @@ class App < Sinatra::Base
   end
 
   get '/status' do
-    @content_countroller.status.to_json
+    # @content_countroller.status.to_json
   end
 
   post '/select' do
